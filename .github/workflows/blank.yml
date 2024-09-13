@@ -6,7 +6,7 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
     inputs:
-      variable1:  # corrected variable name
+      varribe1:
         description: 'this variable is for input'
         type: string
         required: true
@@ -22,11 +22,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run a one-line script
-        run: echo "value from the user" ${{ github.event.inputs.variable1 }}
-  
+        run: echo "value from the user: ${{ github.event.inputs.varribe1 }}"
+
   control-job:
     runs-on: ubuntu-latest
-     ${{ github.event.inputs.check }}
+    if: ${{ github.event.inputs.check == 'true' }}
     steps:
       - name: Run a one-line script
-        run: echo "value from the user ${{ github.event.inputs.check }}"
+        run: echo "Control job executed with check: ${{ github.event.inputs.check }}"
